@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>我的网站</h2>
+            <a href="{% url 'website_create' %}" class="btn btn-primary">添加网站</a>
+        </div>
+        {% if websites %}
+            <div class="row">
+                {% for website in websites %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ website.name }}</h5>
+                                <p class="card-text">{{ website.description }}</p>
+                                <a href="{{ website.url }}" target="_blank" class="btn btn-outline-primary">访问网站</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                添加时间：{{ website.created_at|date:"Y-m-d H:i" }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                还没有添加任何网站，点击右上角的"添加网站"开始使用吧！
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
